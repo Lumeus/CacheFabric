@@ -2,8 +2,14 @@ package resources;
 
 public interface ISingleton {
 	
-	static ISingleton get() {
-		return null;
+	default int getCounter() {
+		return 0;
+	}
+	
+	int upCounter();
+	
+	default String getName() {
+		return "";
 	}
 	
 }
