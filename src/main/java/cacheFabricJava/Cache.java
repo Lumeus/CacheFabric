@@ -1,8 +1,8 @@
-package resources;
+package cacheFabricJava;
 
 import java.util.ArrayList;
 
-public class TopCache implements ICache {
+public class Cache implements ICache {
 
 	private ICache down;						// Ссылка на уровень ниже
 	private ArrayList<ISingleton> memory;		// Массив синглтонов в кэше
@@ -10,22 +10,22 @@ public class TopCache implements ICache {
 	private int minCounter = 0;					// Счетчик самого редкого
 	private int maxCounter = 0;					// Счетчик самого частого
 	
-	public TopCache(int countLevel, int memorySize) { 
-		System.out.println("Вызван конструктор TopCache");
+	public Cache(int countLevel, int memorySize) {
+		System.out.println("Вызван конструктор Cache");
 		memory = new ArrayList<ISingleton>(memorySize); // создаём память кэша
 		this.memorySize = memorySize;
 		// создаём кэши нижнего уровня
 		if (countLevel > 0) {
-			down = new Cache(countLevel - 1, memorySize); 
+			down = new Cache(countLevel - 1, memorySize);
 		}
 		else {
 			down = new Fabric();
 		}
-		System.out.println("Создан TopCache");
+		System.out.println("Создан Cache");
 	}
 	
 	public ISingleton get(String name) {
-		System.out.println("Вызван TopCache.get()");
+		System.out.println("Вызван Cache.get()");
 		ISingleton res = null;
 		// просматриваем память кэша, если она не пуста
 		for (int i = 0; i < memory.size(); i++) {
@@ -35,14 +35,13 @@ public class TopCache implements ICache {
 				break;
 			}
 		}
-		// если объект не был найден в памяти кэша, то ищем на следующем уровне кэша 
+		// если объект не был найден в памяти кэша, то ищем на следующем уровне кэша
 		if (res == null) res = down.get(name);
-		take(res); // take(взять) - пытаемся разместить найденный объект в памяти кэша
 		return res;
 	}
 	
 	public void take(ISingleton obj) {
-		System.out.println("Вызван TopCache.take()");
+		System.out.println("Вызван Cache.take()");
 		ISingleton trash = null;
 		boolean objAdded = false;
 		// проверяем подходит ли объект к данному уровню кэша
@@ -78,7 +77,6 @@ public class TopCache implements ICache {
 	}
 	// выводим память в консоль
 	public void printer() {
-		System.out.print("\nthis lvl -> ");
 		for	(int i = 0; i < memory.size();i++) {
 			System.out.print(memory.get(i).getName() + " ");
 		}
