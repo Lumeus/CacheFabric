@@ -1,4 +1,4 @@
-package resources;
+package cacheFabricJava;
 
 public interface ICache {
 

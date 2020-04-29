@@ -1,8 +1,8 @@
 package apps;
 
-import resources.ICache; // подключили итерфейс кэшей
-import resources.ISingleton; // подключили итерфейс синглтонов
-import resources.TopCache; // подключили класс топКэш
+import cacheFabricJava.ICache; // подключили итерфейс кэшей
+import cacheFabricJava.ISingleton; // подключили итерфейс синглтонов
+import cacheFabricJava.TopCache; // подключили класс топКэш
 
 public class App {
 

@@ -1,6 +1,4 @@
-package resources;
-
-import resources.ISingleton;
+package cacheFabricJava;
 
 public class Singleton_0 implements ISingleton {
 
